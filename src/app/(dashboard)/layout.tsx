@@ -15,10 +15,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Sign-Bridge",
   description:
-    "Sign-Bridge is an  Hackathon  project that allows you to convert sign language to text and vice versa.",
+    "Sign-Bridge is an  project that allows you to convert sign language to text and vice versa.",
 };
 
-export default function RootLayout({
+export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -26,9 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        {children}
+        <main className="flex-1">{children}</main>
       </body>
     </html>
   );
