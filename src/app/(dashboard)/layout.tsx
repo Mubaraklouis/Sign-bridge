@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Header from "@/layout/dashboard/header";
 import Navigation from "@/layout/dashboard/navigation";
+import { ThemeProvider } from "@/context/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,6 +19,9 @@ export const metadata: Metadata = {
   title: "Sign-Bridge",
   description:
     "Sign-Bridge is an  project that allows you to convert sign language to text and vice versa.",
+  icons: {
+    icon: "/favicon.jpg",
+  },
 };
 
 export default function DashboardLayout({
@@ -30,9 +34,16 @@ export default function DashboardLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Navigation />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Navigation />
+        </ThemeProvider>
       </body>
     </html>
   );

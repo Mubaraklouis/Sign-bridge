@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
+import { ThemeProvider } from "@/context/theme-provider";
+import Navbar from "@/components/home/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Sign-Bridge",
   description:
-    "Sign-Bridge is an  Hackathon  project that allows you to convert sign language to text and vice versa.",
+    "Sign-Bridge is an  project that allows you to convert sign language to text and vice versa.",
+  icons: {
+    icon: "/favicon.jpg",
+  },
 };
 
 export default function RootLayout({
@@ -26,9 +31,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          <main className="flex-1">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );
