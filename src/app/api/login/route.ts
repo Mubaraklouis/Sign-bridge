@@ -16,21 +16,51 @@ export async function POST(request: NextRequest) {
 
     // Get the token from the response
     const token = response.data?.accessToken;
+    const user_id = response.data?.user_id;
+    console.log(token); // Log token to verify it's being received
 
     // If token is received, set it in the cookies
     if (token) {
-      setCookie("token", token, {
-        httpOnly: true,
-        sameSite: "strict",
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
-      });
+      const response = NextResponse.next();
+      setCookie("token", token, { req: request as NextRequest, res: response });
 
       // Return success response
       return NextResponse.json(
         { message: "Token received and stored in cookies" },
         { status: 201 }
       );
+
+      // Set the cookie with the token
+      setCookie("token", token, {
+        httpOnly: true,
+        sameSite: "strict",
+        secure: process.env.NODE_ENV === "production", // Set `secure: true` only in production
+        path: "/",
+        maxAge: 60 * 60 * 24, // Set cookie expiration (1 day)
+        domain:
+          process.env.NODE_ENV === "production"
+            ? "yourdomain.com"
+            : "localhost",
+        req: request,
+        res, // Pass response object to set the cookie
+      });
+
+      // Set the cookie with the token
+      setCookie("user_id", user_id, {
+        httpOnly: true,
+        sameSite: "strict",
+        secure: process.env.NODE_ENV === "production", // Set `secure: true` only in production
+        path: "/",
+        maxAge: 60 * 60 * 24, // Set cookie expiration (1 day)
+        domain:
+          process.env.NODE_ENV === "production"
+            ? "yourdomain.com"
+            : "localhost",
+        req: request,
+        res, // Pass response object to set the cookie
+      });
+
+      return res;
     } else {
       // Return error if token is not received
       return NextResponse.json(
