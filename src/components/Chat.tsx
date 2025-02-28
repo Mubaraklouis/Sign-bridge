@@ -84,7 +84,7 @@ const Chat = () => {
                 ref={chatIconRef}
                 onClick={toggleChat}
                 size="icon"
-                className="rounded-full size-12 p-2 shadow-md bg-primary_main hover:bg-primary_2 hover:opacity-85"
+                className="rounded-full size-12 p-2 shadow-md bg-primary_main hover:bg-primary_2 hover:opacity-85 text-white"
               >
                 {isChatOpen ? (
                   <ArrowDownCircle className="size-12" />
