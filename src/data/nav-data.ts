@@ -10,6 +10,11 @@ import {
 
 export const navData: NavItemType[] = [
   {
+    label: "Chat",
+    icon: MessageCircle,
+    href: "/translator",
+  },
+  {
     label: "Speech",
     icon: Mic,
     href: "/text-to-speech",
@@ -22,13 +27,9 @@ export const navData: NavItemType[] = [
   {
     label: "Video",
     icon: Video,
-    href: "/translator",
+    href: "/video",
   },
-  {
-    label: "Chat",
-    icon: MessageCircle,
-    href: "/chat",
-  },
+
   {
     label: "Settings",
     icon: Settings,

@@ -67,9 +67,9 @@ export default function TranslatorPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen ">
+    <div className="flex flex-col min-h-screen mb-10">
       <main className="container flex-1 py-6 mx-auto px-2">
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-3 grid-cols-1">
           <div className="lg:col-span-2">
             <Card className="overflow-hidden">
               <CardContent className="p-0">
@@ -77,7 +77,10 @@ export default function TranslatorPage() {
                   <ASLTranslator onTranslation={handleTranslation} />
                 ) : (
                   <div className="flex items-center justify-center bg-muted aspect-video">
-                    <Button onClick={toggleWebcam}>
+                    <Button
+                      onClick={toggleWebcam}
+                      className="bg-primary_main hover:bg-primary_main hover:opacity-75 text-white"
+                    >
                       <Camera className="w-4 h-4 mr-2" />
                       Enable Webcam
                     </Button>
@@ -90,6 +93,11 @@ export default function TranslatorPage() {
                 <Button
                   variant={isWebcamActive ? "destructive" : "default"}
                   onClick={toggleWebcam}
+                  className={
+                    isWebcamActive
+                      ? "bg-destructive hover:bg-destructive hover:opacity-75"
+                      : "bg-primary_main hover:bg-primary_main hover:opacity-75 text-white"
+                  }
                 >
                   {isWebcamActive ? (
                     <>
@@ -162,7 +170,7 @@ export default function TranslatorPage() {
                       {/* Text to be send to the chat bot goes here */}
                       {translatedText ? (
                         <button
-                          className="px-6 py-2 mt-4 rounded-md bg-primary"
+                          className="px-6 py-2 mt-4 rounded-md bg-primary_main hover:bg-primary_main hover:opacity-75 text-white"
                           onClick={() => {
                             navigator.clipboard.writeText(translatedText);
                             sentChatText(translatedText);
