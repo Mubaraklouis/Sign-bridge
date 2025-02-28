@@ -39,6 +39,24 @@ export function SignupForm({
   });
 
   const onSubmit = async (data: z.infer<typeof signupSchema>) => {
+
+    const { fullName, email, password } = data;
+    console.log("Form data:", data);
+
+    try {
+      // Make a POST request using axios
+      const response = await axios.post("http://localhost:4000/api/register", {
+        fullName,
+        email,
+        password,
+      });
+
+      // Log the response data
+      console.log("Response from the server:", response.data);
+
+      // Handle successful registration (e.g., redirect or show a success message)
+      alert("Registration successful!");
+
     const { fullName: username, email, password } = await data;
     // console.log(username, email, password);
 
@@ -60,8 +78,11 @@ export function SignupForm({
       const data = await response.data;
       console.log("Data from the sign in page", data);
       return data;
+
     } catch (error) {
-      console.log("Faild to send data from the sign in page", error);
+      // Handle errors
+      console.error("Failed to register:", error);
+      alert("Registration failed. Please try again.");
     }
   };
 
@@ -128,8 +149,13 @@ export function SignupForm({
                       <FormItem>
                         <FormControl>
                           <Input
+
+                            type="password"
+
+                            placeholder="Enter your password"
                             placeholder="Enter your password"
                             type="password"
+
                             {...field}
                           />
                         </FormControl>
@@ -139,16 +165,23 @@ export function SignupForm({
                   />
                 </div>
                 <Button type="submit" className="w-full">
+
+                  Sign Up
+
                   Sign up
+
                 </Button>
                 <Button variant="outline" className="w-full">
-                  Login with Google
+                  Sign Up with Google
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
                 Already have an account?{" "}
-                <Link href="/login" className="underline underline-offset-4">
+
+                  Login
+
                   Log in
+
                 </Link>
               </div>
             </form>
