@@ -22,7 +22,7 @@ const Hero = () => {
               Start Translating
             </button>
           </Link>
-          <Link href="learn">
+          <Link href="/learn">
             <button
               type="button"
               className="px-8 py-3 m-2 text-lg border rounded dark:border-gray-300 dark:text-gray-50"
