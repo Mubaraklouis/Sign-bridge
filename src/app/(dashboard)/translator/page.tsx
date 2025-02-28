@@ -1,18 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  ArrowLeft,
-  Camera,
-  CameraOff,
-  Settings,
-  Volume2,
-  VolumeX,
-} from "lucide-react";
+import { Camera, CameraOff, Volume2, VolumeX } from "lucide-react";
 import { ASLTranslator } from "@/components/asl-translator";
 import axios from "axios";
 export default function TranslatorPage() {
@@ -75,22 +67,8 @@ export default function TranslatorPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="border-b">
-        <div className="container flex items-center justify-between py-4">
-          <div className="flex items-center gap-2">
-            <Link href="/" className="flex items-center gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              <span>Back to Home</span>
-            </Link>
-          </div>
-          <h1 className="text-xl font-bold">ASL Translator</h1>
-          <Button variant="ghost" size="icon">
-            <Settings className="w-5 h-5" />
-          </Button>
-        </div>
-      </header>
-      <main className="container flex-1 py-6">
+    <div className="flex flex-col min-h-screen ">
+      <main className="container flex-1 py-6 mx-auto px-2">
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <Card className="overflow-hidden">
@@ -181,6 +159,7 @@ export default function TranslatorPage() {
                       <div className="text-3xl font-bold">
                         {translatedText || "No translation yet"}
                       </div>
+                      {/* Text to be send to the chat bot goes here */}
                       {translatedText ? (
                         <button
                           className="px-6 py-2 mt-4 rounded-md bg-primary"

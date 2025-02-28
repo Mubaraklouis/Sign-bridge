@@ -1,4 +1,5 @@
 import { SpeechToText } from "@/components/speech-to-text";
+import { TextToSpeech } from "@/components/text-to-speech";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const TextToSpeechPage = () => {
@@ -17,8 +18,7 @@ const TextToSpeechPage = () => {
             </TabsList>
             <TabsContent value="text-to-speech">
               <h1>
-                Text to Speech Component will be added here by a team member
-                when he complete the feature
+                <TextToSpeech />
               </h1>
             </TabsContent>
             <TabsContent value="speech-to-text">

@@ -22,7 +22,7 @@ export const navData: NavItemType[] = [
   {
     label: "Video",
     icon: Video,
-    href: "/video",
+    href: "/translator",
   },
   {
     label: "Chat",
