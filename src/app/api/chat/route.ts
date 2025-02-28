@@ -3,7 +3,7 @@ import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { initialMessages } from "@/data/chatData";
 
 const google = createGoogleGenerativeAI({
-  apiKey: process.env.GOOGLE_API_KEY || "",
+  apiKey: process.env.GOOGLE_CHAT_API_KEY || "",
 });
 
 export const runtime = "edge";
