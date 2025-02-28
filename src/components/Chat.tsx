@@ -36,7 +36,7 @@ const Chat = () => {
     reload,
     error,
   } = useChat({
-    api: "/api/chat",
+    api: "/api/chatbot",
   });
 
   useEffect(() => {
