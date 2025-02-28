@@ -24,6 +24,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { loginSchema } from "@/schema/zod-schema";
 import { ArrowLeftCircle } from "lucide-react";
+import axios from "axios";
 
 export function LoginForm({
   className,
@@ -37,8 +38,21 @@ export function LoginForm({
     },
   });
 
-  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+    const { email, password } = data;
     console.log(data);
+
+    try {
+      const response = await axios.post("/api/login", {
+        email,
+        password,
+      });
+      const data = await response.data;
+      console.log("Data from the login page", data);
+      return data;
+    } catch (error) {
+      console.log("Faild to send data from the login page", error);
+    }
   };
 
   return (

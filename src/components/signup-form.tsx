@@ -23,6 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { signupSchema } from "@/schema/zod-schema";
+import axios from "axios";
 
 export function SignupForm({
   className,
@@ -37,8 +38,22 @@ export function SignupForm({
     },
   });
 
-  const onSubmit = (data: z.infer<typeof signupSchema>) => {
+  const onSubmit = async (data: z.infer<typeof signupSchema>) => {
+    const { fullName, email, password } = await data;
     console.log(data);
+
+    try {
+      const response = await axios.post("/api/signup", {
+        username: fullName,
+        email,
+        password,
+      });
+      const data = await response.data;
+      console.log("Data from the sign in page", data);
+      return data;
+    } catch (error) {
+      console.log("Faild to send data from the sign in page", error);
+    }
   };
 
   return (
