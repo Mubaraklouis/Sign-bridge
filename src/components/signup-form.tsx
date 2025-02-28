@@ -39,25 +39,9 @@ export function SignupForm({
   });
 
   const onSubmit = async (data: z.infer<typeof signupSchema>) => {
-
-    const { fullName, email, password } = data;
+    const { fullName: username, email, password } = data;
     console.log("Form data:", data);
 
-    try {
-      // Make a POST request using axios
-      const response = await axios.post("http://localhost:4000/api/register", {
-        fullName,
-        email,
-        password,
-      });
-
-      // Log the response data
-      console.log("Response from the server:", response.data);
-
-      // Handle successful registration (e.g., redirect or show a success message)
-      alert("Registration successful!");
-
-    const { fullName: username, email, password } = await data;
     // console.log(username, email, password);
 
     try {
@@ -78,7 +62,6 @@ export function SignupForm({
       const data = await response.data;
       console.log("Data from the sign in page", data);
       return data;
-
     } catch (error) {
       // Handle errors
       console.error("Failed to register:", error);
@@ -149,13 +132,8 @@ export function SignupForm({
                       <FormItem>
                         <FormControl>
                           <Input
-
                             type="password"
-
                             placeholder="Enter your password"
-                            placeholder="Enter your password"
-                            type="password"
-
                             {...field}
                           />
                         </FormControl>
@@ -164,25 +142,17 @@ export function SignupForm({
                     )}
                   />
                 </div>
-                <Button type="submit" className="w-full">
-
-                  Sign Up
-
-                  Sign up
-
-                </Button>
+                <Link href="/login">
+                  <Button type="submit" className="w-full">
+                    login
+                  </Button>
+                </Link>
                 <Button variant="outline" className="w-full">
                   Sign Up with Google
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                Already have an account?{" "}
-
-                  Login
-
-                  Log in
-
-                </Link>
+                Already have an account? Login
               </div>
             </form>
           </Form>
