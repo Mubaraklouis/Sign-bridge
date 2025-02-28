@@ -39,6 +39,7 @@ export function SignupForm({
   });
 
   const onSubmit = async (data: z.infer<typeof signupSchema>) => {
+
     const { fullName, email, password } = data;
     console.log("Form data:", data);
 
@@ -55,6 +56,29 @@ export function SignupForm({
 
       // Handle successful registration (e.g., redirect or show a success message)
       alert("Registration successful!");
+
+    const { fullName: username, email, password } = await data;
+    // console.log(username, email, password);
+
+    try {
+      const response = await axios.post(
+        "/api/signup",
+
+        {
+          username,
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.data;
+      console.log("Data from the sign in page", data);
+      return data;
+
     } catch (error) {
       // Handle errors
       console.error("Failed to register:", error);
@@ -125,8 +149,13 @@ export function SignupForm({
                       <FormItem>
                         <FormControl>
                           <Input
+
                             type="password"
+
                             placeholder="Enter your password"
+                            placeholder="Enter your password"
+                            type="password"
+
                             {...field}
                           />
                         </FormControl>
@@ -136,7 +165,11 @@ export function SignupForm({
                   />
                 </div>
                 <Button type="submit" className="w-full">
+
                   Sign Up
+
+                  Sign up
+
                 </Button>
                 <Button variant="outline" className="w-full">
                   Sign Up with Google
@@ -144,8 +177,11 @@ export function SignupForm({
               </div>
               <div className="mt-4 text-center text-sm">
                 Already have an account?{" "}
-                <Link href="/login" className="underline underline-offset-4">
+
                   Login
+
+                  Log in
+
                 </Link>
               </div>
             </form>
