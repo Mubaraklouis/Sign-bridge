@@ -84,7 +84,7 @@ const Chat = () => {
                 ref={chatIconRef}
                 onClick={toggleChat}
                 size="icon"
-                className="rounded-full size-12 p-2 shadow-md bg-blue-600 hover:bg-primary_2 hover:opacity-85"
+                className="rounded-full size-12 p-2 shadow-md bg-primary_main hover:bg-primary_2 hover:opacity-85"
               >
                 {isChatOpen ? (
                   <ArrowDownCircle className="size-12" />
@@ -107,7 +107,7 @@ const Chat = () => {
               <Card>
                 <CardHeader className="flex justify-between flex-row  space-y-0 pb-3">
                   <CardTitle className="text-lg font-bold">
-                    Chat with New Liberia Women AI
+                    Chat with SignBridge AI
                   </CardTitle>
                   <Button
                     variant="ghost"
@@ -136,9 +136,9 @@ const Chat = () => {
                         <div
                           className={`inline-block  rounded-lg ${
                             message.role === "user"
-                              ? "bg-blue-300 text-white p-1"
-                              : "bg-gray-200"
-                          } p-4`}
+                              ? "bg-primary_main text-white p-1"
+                              : "bg-gray-200 dark:bg-gray-700"
+                          } p-2`}
                         >
                           <ReactMarkdown
                             remarkPlugins={[remarkGfk]}
@@ -213,7 +213,7 @@ const Chat = () => {
                       {isLoading ? (
                         <Loader2 className="animate-spin" />
                       ) : (
-                        <Send className="size-4 " />
+                        <Send className="size-4 text-primary_main" />
                       )}
                     </Button>
                   </form>
