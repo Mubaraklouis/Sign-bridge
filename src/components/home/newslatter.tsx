@@ -13,8 +13,8 @@ const NewsLetter = () => {
             <div className="grid grid-cols-12 place-items-center">
               <div className="col-span-12 sm:col-span-6 sm:col-start-4 sm:px-3 md:px-12 lg:px-24">
                 <p className="text-lg leading-6 mb-12">
-                  It’s easier to reach your savings goals when you have the
-                  right savings account.
+                  It’s easier to stay up to date with our latest news and
+                  updates when you’re subscribed to our newsletter.
                 </p>
                 <form>
                   <div className="relative flex flex-wrap items-center justify-between p-2 bg-white rounded w-full">
@@ -24,7 +24,7 @@ const NewsLetter = () => {
                       placeholder="Enter Email"
                     />
                     <div className="absolute right-1">
-                      <button className="bg-blue-600 hover:bg-opacity-90 text-white border border-blue-600 py-3 px-7 rounded transition font-normal">
+                      <button className="bg-primary_main hover:bg-opacity-90 text-white border border-primary_main py-3 px-7 rounded transition font-normal">
                         Subscribe
                       </button>
                     </div>

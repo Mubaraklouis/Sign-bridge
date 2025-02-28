@@ -17,7 +17,7 @@ const HowItWorks = () => {
           <div className="grid gap-8 md:grid-cols-3">
             <div className="space-y-2 text-center">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                <Camera />
+                <Camera className="text-primary_main" />
               </div>
               <h3 className="text-xl font-bold">Webcam Capture</h3>
               <p className="text-muted-foreground">
@@ -27,7 +27,7 @@ const HowItWorks = () => {
             </div>
             <div className="space-y-2 text-center">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                <Bot />
+                <Bot className="text-primary_main" />
               </div>
               <h3 className="text-xl font-bold">AI Processing</h3>
               <p className="text-muted-foreground">
@@ -37,7 +37,7 @@ const HowItWorks = () => {
             </div>
             <div className="space-y-2 text-center">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                <ArrowRightLeft />
+                <ArrowRightLeft className="text-primary_main" />
               </div>
               <h3 className="text-xl font-bold">Text Translation</h3>
               <p className="text-muted-foreground">

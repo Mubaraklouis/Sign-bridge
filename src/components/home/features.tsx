@@ -39,7 +39,7 @@ const features: Feature[] = [
 const FeatureItem = ({ feature }: { feature: Feature }) => {
   return (
     <div className="relative p-4 md:p-10">
-      <div className="h-16 w-16 bg-white dark:bg-slate-800 shadow-xl flex justify-center items-center text-blue-600 rounded-full text-3xl mb-6 mr-6">
+      <div className="h-16 w-16 bg-white dark:bg-slate-800 shadow-xl flex justify-center items-center text-primary_main rounded-full text-3xl mb-6 mr-6">
         <feature.icon />
       </div>
       <div>
