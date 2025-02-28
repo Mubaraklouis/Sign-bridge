@@ -39,20 +39,26 @@ export function SignupForm({
   });
 
   const onSubmit = async (data: z.infer<typeof signupSchema>) => {
-    const { fullName, email, password } = await data;
-    console.log(data);
+    const { fullName, email, password } = data;
+    console.log("Form data:", data);
 
     try {
-      const response = await axios.post("/api/signup", {
-        username: fullName,
+      // Make a POST request using axios
+      const response = await axios.post("http://localhost:4000/api/register", {
+        fullName,
         email,
         password,
       });
-      const data = await response.data;
-      console.log("Data from the sign in page", data);
-      return data;
+
+      // Log the response data
+      console.log("Response from the server:", response.data);
+
+      // Handle successful registration (e.g., redirect or show a success message)
+      alert("Registration successful!");
     } catch (error) {
-      console.log("Faild to send data from the sign in page", error);
+      // Handle errors
+      console.error("Failed to register:", error);
+      alert("Registration failed. Please try again.");
     }
   };
 
@@ -118,7 +124,11 @@ export function SignupForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <Input placeholder="Enter your password" {...field} />
+                          <Input
+                            type="password"
+                            placeholder="Enter your password"
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -126,16 +136,16 @@ export function SignupForm({
                   />
                 </div>
                 <Button type="submit" className="w-full">
-                  Login
+                  Sign Up
                 </Button>
                 <Button variant="outline" className="w-full">
-                  Login with Google
+                  Sign Up with Google
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
                 Already have an account?{" "}
                 <Link href="/login" className="underline underline-offset-4">
-                  login
+                  Login
                 </Link>
               </div>
             </form>
