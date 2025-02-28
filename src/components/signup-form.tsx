@@ -44,14 +44,16 @@ export function SignupForm({
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/register",
+        "/api/signup",
         {
           username,
           email,
           password,
         },
         {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
       const data = await response.data;
@@ -136,7 +138,7 @@ export function SignupForm({
                   />
                 </div>
                 <Button type="submit" className="w-full">
-                  Login
+                  Sign up
                 </Button>
                 <Button variant="outline" className="w-full">
                   Login with Google
@@ -145,7 +147,7 @@ export function SignupForm({
               <div className="mt-4 text-center text-sm">
                 Already have an account?{" "}
                 <Link href="/login" className="underline underline-offset-4">
-                  Sign Up
+                  Log in
                 </Link>
               </div>
             </form>

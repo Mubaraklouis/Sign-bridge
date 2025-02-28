@@ -3,19 +3,16 @@ import axios from "axios";
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { fullName, email, password } = body;
+  const { username, email, password } = body;
 
-  console.log(fullName, email, password);
+  console.log(username, email, password);
 
   try {
-    const response = await axios.post(
-      "https://91b1-196-12-151-106.ngrok-free.app/api/register",
-      {
-        username: fullName,
-        email,
-        password,
-      }
-    );
+    const response = await axios.post("http://localhost:4000/api/register", {
+      username,
+      email,
+      password,
+    });
     const data = await response.data;
     return NextResponse.json(data);
   } catch (error) {
