@@ -5,3 +5,9 @@ export type NavItemType = {
   icon: ComponentType; // or ComponentType<any> if your icon component accepts props
   href: string;
 };
+
+export type Feature = {
+  icon: React.ComponentType;
+  title: string;
+  desc: string;
+};

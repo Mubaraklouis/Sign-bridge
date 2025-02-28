@@ -3,7 +3,7 @@ import { ArrowRightLeft, Bot, Camera } from "lucide-react";
 const HowItWorks = () => {
   return (
     <>
-      <section className="container py-8 md:pb-16">
+      <section className="container py-8 md:pb-14">
         <div className="mx-auto grid max-w-5xl gap-6 lg:gap-12">
           <div className="space-y-2 text-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">

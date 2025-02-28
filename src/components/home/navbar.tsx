@@ -6,7 +6,7 @@ import React from "react";
 const Navbar = () => {
   return (
     <>
-      <header className="border-b sticky top-0 w-full bg-white  dark:bg-gray-500">
+      <header className="border-b sticky top-0 w-full bg-white  dark:bg-gray-500 z-50">
         <div className="container flex items-center justify-between py-4 px-2 md:px-12">
           <div className="flex items-center gap-2">
             <SignalHigh />
