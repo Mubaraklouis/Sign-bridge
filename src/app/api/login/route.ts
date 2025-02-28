@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import { setCookies } from "cookies-next";
-
+// import { setCookies } from "cookies-next";
+import { setCookie } from "cookies-next";
 export async function POST(request: Request) {
   try {
     // Extract email and password from the request body
@@ -19,7 +19,8 @@ export async function POST(request: Request) {
 
     // If token is received, set it in the cookies
     if (token) {
-      setCookies("token", token, { req: request, res: NextResponse });
+      const response = NextResponse.next();
+      setCookie("token", token, { req: request as NextRequest, res: response });
 
       // Return success response
       return NextResponse.json(

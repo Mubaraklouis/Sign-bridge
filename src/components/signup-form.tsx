@@ -45,6 +45,7 @@ export function SignupForm({
     try {
       const response = await axios.post(
         "/api/signup",
+
         {
           username,
           email,
