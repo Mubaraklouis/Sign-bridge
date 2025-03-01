@@ -16,6 +16,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function LessonsPage() {
   // This is the Lessons Category main data
@@ -70,6 +71,8 @@ export default function LessonsPage() {
     toast.success("Upgrade to premium to unlock recommended lessons");
   };
 
+  const router = useRouter();
+
   return (
     <div className="container py-10 mx-auto px-2 mb-20">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:items-center">
@@ -80,9 +83,21 @@ export default function LessonsPage() {
             to advanced.
           </p>
         </div>
-        <Button asChild onClick={handleUpgrade}>
-          <span>Recommended for You</span>
-        </Button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => router.back()}
+            className=" bg-black px-3 py-1 text-white rounded-md"
+          >
+            Back
+          </button>
+          <Button
+            asChild
+            onClick={handleUpgrade}
+            className="bg-primary_main hover:bg-primary_main text-white"
+          >
+            <span>Recommended for You</span>
+          </Button>
+        </div>
       </div>
 
       <div className="grid gap-6 mt-8 md:grid-cols-2 lg:grid-cols-2">
