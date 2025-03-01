@@ -17,7 +17,7 @@ const toolsData = [
 const LearnSignLanguagePage = () => {
   return (
     <>
-      <section className="container mt-8 px-2 md:pb-14  mx-auto">
+      <section className="container mt-8 px-2 md:pb-14  mx-auto ">
         <h1 className="text-3xl font-bold text-center text-white pb-12 underline">
           Learning Tools
         </h1>

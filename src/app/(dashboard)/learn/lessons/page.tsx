@@ -1,11 +1,18 @@
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 
 export default function LessonsPage() {
   // This would come from a database in a real application
@@ -13,7 +20,8 @@ export default function LessonsPage() {
     {
       id: "beginner",
       title: "Beginner",
-      description: "Start your sign language journey with basic signs and simple phrases",
+      description:
+        "Start your sign language journey with basic signs and simple phrases",
       image: "/placeholder.svg?height=200&width=300",
       progress: 0,
       lessons: 10,
@@ -23,7 +31,8 @@ export default function LessonsPage() {
     {
       id: "intermediate",
       title: "Intermediate",
-      description: "Build on your foundation with more complex signs and conversations",
+      description:
+        "Build on your foundation with more complex signs and conversations",
       image: "/placeholder.svg?height=200&width=300",
       progress: 0,
       lessons: 15,
@@ -33,7 +42,8 @@ export default function LessonsPage() {
     {
       id: "advanced",
       title: "Advanced",
-      description: "Master advanced concepts, idioms, and fluent signing techniques",
+      description:
+        "Master advanced concepts, idioms, and fluent signing techniques",
       image: "/placeholder.svg?height=200&width=300",
       progress: 0,
       lessons: 12,
@@ -43,22 +53,24 @@ export default function LessonsPage() {
     {
       id: "specialized",
       title: "Specialized Topics",
-      description: "Learn specialized vocabulary for specific contexts and situations",
+      description:
+        "Learn specialized vocabulary for specific contexts and situations",
       image: "/placeholder.svg?height=200&width=300",
       progress: 0,
       lessons: 8,
       completedLessons: 0,
       color: "bg-orange-100 text-orange-800 hover:bg-orange-200",
     },
-  ]
+  ];
 
   return (
-    <div className="container py-10">
+    <div className="container py-10 mx-auto px-2 mb-20">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:items-center">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Lessons</h1>
           <p className="text-muted-foreground">
-            Explore our structured curriculum designed to take you from beginner to advanced.
+            Explore our structured curriculum designed to take you from beginner
+            to advanced.
           </p>
         </div>
         <Button asChild>
@@ -70,7 +82,12 @@ export default function LessonsPage() {
         {categories.map((category) => (
           <Card key={category.id} className="overflow-hidden">
             <div className="relative h-[200px] w-full">
-              <Image src={category.image || "/placeholder.svg"} alt={category.title} fill className="object-cover" />
+              <Image
+                src={category.image || "/placeholder.svg"}
+                alt={category.title}
+                fill
+                className="object-cover"
+              />
               <div className="absolute top-2 right-2">
                 <Badge className={category.color}>{category.title}</Badge>
               </div>
@@ -90,8 +107,10 @@ export default function LessonsPage() {
             </CardContent>
             <CardFooter>
               <Button asChild className="w-full">
-                <Link href={`/lessons/${category.id}`}>
-                  {category.progress > 0 ? "Continue Learning" : "Start Learning"}{" "}
+                <Link href={`/learn/lessons/${category.id}`}>
+                  {category.progress > 0
+                    ? "Continue Learning"
+                    : "Start Learning"}{" "}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -100,6 +119,5 @@ export default function LessonsPage() {
         ))}
       </div>
     </div>
-  )
+  );
 }
-

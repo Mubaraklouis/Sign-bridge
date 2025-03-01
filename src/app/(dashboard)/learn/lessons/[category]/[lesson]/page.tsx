@@ -1,15 +1,23 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { ArrowLeft, ArrowRight, CheckCircle, Play, PauseCircle, Volume2, AlertCircle } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle,
+  Play,
+  PauseCircle,
+  Volume2,
+  AlertCircle,
+} from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Progress } from "@/components/ui/progress"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -17,23 +25,33 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
 
-export default function LessonPage({ params }: { params: { category: string; lesson: string } }) {
-  const [activeTab, setActiveTab] = useState("learn")
-  const [videoPlaying, setVideoPlaying] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const [completedSections, setCompletedSections] = useState<string[]>([])
-  const [quizAnswers, setQuizAnswers] = useState<{ [key: string]: number }>({})
-  const [quizSubmitted, setQuizSubmitted] = useState(false)
-  const [quizScore, setQuizScore] = useState(0)
-  const [practiceAttempts, setPracticeAttempts] = useState<{ [key: string]: boolean }>({})
-  const [showSuccessDialog, setShowSuccessDialog] = useState(false)
+export default function LessonPage({
+  params,
+}: {
+  params: { category: string; lesson: string };
+}) {
+  const [activeTab, setActiveTab] = useState("learn");
+  const [videoPlaying, setVideoPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [completedSections, setCompletedSections] = useState<string[]>([]);
+  const [quizAnswers, setQuizAnswers] = useState<{ [key: string]: number }>({});
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [quizScore, setQuizScore] = useState(0);
+  const [practiceAttempts, setPracticeAttempts] = useState<{
+    [key: string]: boolean;
+  }>({});
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+
+  console.log(activeTab);
 
   // This would come from a database in a real application
   const lessonData = {
     title: "The Sign Language Alphabet",
-    description: "Learn to fingerspell the alphabet, the foundation of sign language",
+    description:
+      "Learn to fingerspell the alphabet, the foundation of sign language",
     videoUrl: "/placeholder.svg?height=400&width=700",
     sections: [
       {
@@ -57,7 +75,8 @@ export default function LessonPage({ params }: { params: { category: string; les
       {
         id: "o-u",
         title: "Letters O-U",
-        content: "These letters involve more finger movement. Practice slowly at first to ensure accuracy.",
+        content:
+          "These letters involve more finger movement. Practice slowly at first to ensure accuracy.",
       },
       {
         id: "v-z",
@@ -70,13 +89,23 @@ export default function LessonPage({ params }: { params: { category: string; les
       {
         id: "q1",
         question: "Which finger is extended in the sign for the letter 'D'?",
-        options: ["Index finger", "Middle finger", "Ring finger", "Pinky finger"],
+        options: [
+          "Index finger",
+          "Middle finger",
+          "Ring finger",
+          "Pinky finger",
+        ],
         correctAnswer: 0,
       },
       {
         id: "q2",
         question: "What shape does your hand make for the letter 'C'?",
-        options: ["Closed fist", "Curved hand", "Flat hand with thumb tucked", "V shape"],
+        options: [
+          "Closed fist",
+          "Curved hand",
+          "Flat hand with thumb tucked",
+          "V shape",
+        ],
         correctAnswer: 1,
       },
       {
@@ -106,73 +135,86 @@ export default function LessonPage({ params }: { params: { category: string; les
         example: "/placeholder.svg?height=200&width=300",
       },
     ],
-  }
+  };
 
   const handleVideoToggle = () => {
-    setVideoPlaying(!videoPlaying)
-  }
+    setVideoPlaying(!videoPlaying);
+  };
 
   const completeSection = (sectionId: string) => {
     if (!completedSections.includes(sectionId)) {
-      const newCompletedSections = [...completedSections, sectionId]
-      setCompletedSections(newCompletedSections)
-      const newProgress = Math.round((newCompletedSections.length / lessonData.sections.length) * 100)
-      setProgress(newProgress)
+      const newCompletedSections = [...completedSections, sectionId];
+      setCompletedSections(newCompletedSections);
+      const newProgress = Math.round(
+        (newCompletedSections.length / lessonData.sections.length) * 100
+      );
+      setProgress(newProgress);
 
       if (newProgress === 100) {
-        setShowSuccessDialog(true)
+        setShowSuccessDialog(true);
       }
     }
-  }
+  };
 
   const handleQuizAnswer = (questionId: string, answerIndex: number) => {
     setQuizAnswers((prev) => ({
       ...prev,
       [questionId]: answerIndex,
-    }))
-  }
+    }));
+  };
 
   const submitQuiz = () => {
-    let score = 0
+    let score = 0;
     lessonData.quiz.forEach((question) => {
       if (quizAnswers[question.id] === question.correctAnswer) {
-        score++
+        score++;
       }
-    })
-    setQuizScore(score)
-    setQuizSubmitted(true)
-  }
+    });
+    setQuizScore(score);
+    setQuizSubmitted(true);
+  };
 
   const markPracticeAttempt = (practiceId: string) => {
     setPracticeAttempts((prev) => ({
       ...prev,
       [practiceId]: true,
-    }))
-  }
+    }));
+  };
 
   const resetQuiz = () => {
-    setQuizAnswers({})
-    setQuizSubmitted(false)
-    setQuizScore(0)
-  }
+    setQuizAnswers({});
+    setQuizSubmitted(false);
+    setQuizScore(0);
+  };
+
+  const router = useRouter();
 
   return (
-    <div className="container py-10">
+    <div className="container py-10 mx-auto px-2 mb-20">
       <div className="mb-6">
-        <Link
-          href={`/lessons/${params.category}`}
+        <span
+          onClick={() => router.back()}
           className="flex items-center text-sm text-muted-foreground hover:text-foreground mb-4"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to {params.category.charAt(0).toUpperCase() + params.category.slice(1)} Lessons
-        </Link>
-        <h1 className="text-3xl font-bold tracking-tight">{lessonData.title}</h1>
+          Back to
+          {params.category.charAt(0).toUpperCase() +
+            params.category.slice(1)}{" "}
+          Lessons
+        </span>
+        <h1 className="text-3xl font-bold tracking-tight">
+          {lessonData.title}
+        </h1>
         <p className="text-muted-foreground">{lessonData.description}</p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <Tabs defaultValue="learn" className="w-full" onValueChange={setActiveTab}>
+          <Tabs
+            defaultValue="learn"
+            className="w-full"
+            onValueChange={setActiveTab}
+          >
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="learn">Learn</TabsTrigger>
               <TabsTrigger value="practice">Practice</TabsTrigger>
@@ -192,7 +234,11 @@ export default function LessonPage({ params }: { params: { category: string; les
                     className="absolute bg-background/80 hover:bg-background/90"
                     onClick={handleVideoToggle}
                   >
-                    {videoPlaying ? <PauseCircle className="h-8 w-8" /> : <Play className="h-8 w-8" />}
+                    {videoPlaying ? (
+                      <PauseCircle className="h-8 w-8" />
+                    ) : (
+                      <Play className="h-8 w-8" />
+                    )}
                   </Button>
                 </div>
               </div>
@@ -202,21 +248,30 @@ export default function LessonPage({ params }: { params: { category: string; les
                   <Card key={section.id}>
                     <CardContent className="pt-6">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-semibold">{section.title}</h3>
+                        <h3 className="text-lg font-semibold">
+                          {section.title}
+                        </h3>
                         {completedSections.includes(section.id) && (
-                          <Badge variant="secondary" className="bg-green-100 text-green-800">
+                          <Badge
+                            variant="secondary"
+                            className="bg-green-100 text-green-800"
+                          >
                             <CheckCircle className="h-4 w-4 mr-1" /> Completed
                           </Badge>
                         )}
                       </div>
-                      <p className="text-muted-foreground mb-4">{section.content}</p>
+                      <p className="text-muted-foreground mb-4">
+                        {section.content}
+                      </p>
                       <Button
                         onClick={() => completeSection(section.id)}
                         disabled={completedSections.includes(section.id)}
-                        className="gap-2"
+                        className="gap-2 bg-primary_main hover:bg-primary_main/80 text-white"
                       >
                         <CheckCircle className="h-4 w-4" />
-                        {completedSections.includes(section.id) ? "Completed" : "Mark as Complete"}
+                        {completedSections.includes(section.id)
+                          ? "Completed"
+                          : "Mark as Complete"}
                       </Button>
                     </CardContent>
                   </Card>
@@ -226,10 +281,13 @@ export default function LessonPage({ params }: { params: { category: string; les
 
             <TabsContent value="practice" className="mt-4">
               <div className="bg-card rounded-lg p-6 border">
-                <h2 className="text-xl font-semibold mb-4">Practice Fingerspelling</h2>
+                <h2 className="text-xl font-semibold mb-4">
+                  Practice Fingerspelling
+                </h2>
                 <p className="mb-6">
-                  Practice spelling these words using the fingerspelling alphabet you just learned. Try to spell them
-                  without looking at a reference.
+                  Practice spelling these words using the fingerspelling
+                  alphabet you just learned. Try to spell them without looking
+                  at a reference.
                 </p>
 
                 <div className="space-y-6">
@@ -242,7 +300,9 @@ export default function LessonPage({ params }: { params: { category: string; les
                           Hear Word
                         </Button>
                       </div>
-                      <p className="text-sm text-muted-foreground">{item.hint}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {item.hint}
+                      </p>
 
                       <Dialog>
                         <DialogTrigger asChild>
@@ -254,7 +314,9 @@ export default function LessonPage({ params }: { params: { category: string; les
                         <DialogContent>
                           <DialogHeader>
                             <DialogTitle>Example: {item.word}</DialogTitle>
-                            <DialogDescription>Watch the demonstration and practice along</DialogDescription>
+                            <DialogDescription>
+                              Watch the demonstration and practice along
+                            </DialogDescription>
                           </DialogHeader>
                           <div className="aspect-video bg-muted rounded-lg overflow-hidden">
                             <img
@@ -288,18 +350,29 @@ export default function LessonPage({ params }: { params: { category: string; les
 
             <TabsContent value="quiz" className="mt-4">
               <div className="bg-card rounded-lg p-6 border">
-                <h2 className="text-xl font-semibold mb-4">Test Your Knowledge</h2>
+                <h2 className="text-xl font-semibold mb-4">
+                  Test Your Knowledge
+                </h2>
                 <p className="mb-6">
-                  Answer these questions to test your understanding of the alphabet in sign language.
+                  Answer these questions to test your understanding of the
+                  alphabet in sign language.
                 </p>
 
                 {quizSubmitted && (
-                  <Alert className={quizScore === lessonData.quiz.length ? "bg-green-100" : "bg-yellow-100"}>
+                  <Alert
+                    className={
+                      quizScore === lessonData.quiz.length
+                        ? "bg-green-100"
+                        : "bg-yellow-100"
+                    }
+                  >
                     <AlertCircle className="h-4 w-4" />
                     <AlertTitle>Quiz Results</AlertTitle>
                     <AlertDescription>
                       You scored {quizScore} out of {lessonData.quiz.length}!
-                      {quizScore === lessonData.quiz.length ? " Excellent work!" : " Keep practicing and try again!"}
+                      {quizScore === lessonData.quiz.length
+                        ? " Excellent work!"
+                        : " Keep practicing and try again!"}
                     </AlertDescription>
                   </Alert>
                 )}
@@ -318,7 +391,9 @@ export default function LessonPage({ params }: { params: { category: string; les
                               id={`q${qIndex}-o${oIndex}`}
                               name={`question-${qIndex}`}
                               checked={quizAnswers[question.id] === oIndex}
-                              onChange={() => handleQuizAnswer(question.id, oIndex)}
+                              onChange={() =>
+                                handleQuizAnswer(question.id, oIndex)
+                              }
                               disabled={quizSubmitted}
                               className="mr-2"
                             />
@@ -329,8 +404,8 @@ export default function LessonPage({ params }: { params: { category: string; les
                                   ? oIndex === question.correctAnswer
                                     ? "text-green-600 font-medium"
                                     : quizAnswers[question.id] === oIndex
-                                      ? "text-red-600"
-                                      : ""
+                                    ? "text-red-600"
+                                    : ""
                                   : ""
                               }
                             >
@@ -339,24 +414,33 @@ export default function LessonPage({ params }: { params: { category: string; les
                           </div>
                         ))}
                       </div>
-                      {quizSubmitted && quizAnswers[question.id] !== question.correctAnswer && (
-                        <p className="text-sm text-red-600 mt-2">
-                          Correct answer: {question.options[question.correctAnswer]}
-                        </p>
-                      )}
+                      {quizSubmitted &&
+                        quizAnswers[question.id] !== question.correctAnswer && (
+                          <p className="text-sm text-red-600 mt-2">
+                            Correct answer:{" "}
+                            {question.options[question.correctAnswer]}
+                          </p>
+                        )}
                     </div>
                   ))}
 
                   {!quizSubmitted ? (
                     <Button
                       onClick={submitQuiz}
-                      disabled={Object.keys(quizAnswers).length !== lessonData.quiz.length}
+                      disabled={
+                        Object.keys(quizAnswers).length !==
+                        lessonData.quiz.length
+                      }
                       className="w-full"
                     >
                       Submit Answers
                     </Button>
                   ) : (
-                    <Button onClick={resetQuiz} variant="outline" className="w-full">
+                    <Button
+                      onClick={resetQuiz}
+                      variant="outline"
+                      className="w-full"
+                    >
                       Try Again
                     </Button>
                   )}
@@ -371,7 +455,9 @@ export default function LessonPage({ params }: { params: { category: string; les
             <CardContent className="pt-6">
               <h3 className="text-lg font-semibold mb-2">Your Progress</h3>
               <Progress value={progress} className="h-2 mb-2" />
-              <p className="text-sm text-muted-foreground">{progress}% complete</p>
+              <p className="text-sm text-muted-foreground">
+                {progress}% complete
+              </p>
 
               <div className="mt-6 space-y-2">
                 <h4 className="text-sm font-medium">Lesson Navigation</h4>
@@ -414,7 +500,9 @@ export default function LessonPage({ params }: { params: { category: string; les
 
           <Card>
             <CardContent className="pt-6">
-              <h3 className="text-lg font-semibold mb-2">Community Discussion</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                Community Discussion
+              </h3>
               <p className="text-sm text-muted-foreground mb-4">
                 Join the conversation about this lesson with other learners.
               </p>
@@ -431,18 +519,21 @@ export default function LessonPage({ params }: { params: { category: string; les
           <DialogHeader>
             <DialogTitle>Congratulations! 🎉</DialogTitle>
             <DialogDescription>
-              You've completed all sections of this lesson! Would you like to proceed to the quiz to test your
-              knowledge?
+              You&apos;ve completed all sections of this lesson! Would you like
+              to proceed to the quiz to test your knowledge?
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-end space-x-2">
-            <Button variant="outline" onClick={() => setShowSuccessDialog(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setShowSuccessDialog(false)}
+            >
               Review Lesson
             </Button>
             <Button
               onClick={() => {
-                setActiveTab("quiz")
-                setShowSuccessDialog(false)
+                setActiveTab("quiz");
+                setShowSuccessDialog(false);
               }}
             >
               Take Quiz
@@ -451,6 +542,5 @@ export default function LessonPage({ params }: { params: { category: string; les
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
-

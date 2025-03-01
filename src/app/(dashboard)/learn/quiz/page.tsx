@@ -159,7 +159,7 @@ const SignQuizGame = () => {
       <section className="flex min-h-screen flex-col items-center justify-center p-4 mb-24">
         <button
           onClick={() => router.back()}
-          className="mb-4 bg-primary_main px-3 py-1 rounded-lg text-white"
+          className="mb-4 bg-primary_main px-3 py-1 rounded-lg text-white "
         >
           Back
         </button>
