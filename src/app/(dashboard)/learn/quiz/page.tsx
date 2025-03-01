@@ -7,70 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { InfoIcon as InfoCircle } from "lucide-react";
-
-// Define the sign data structure
-interface Sign {
-  word: string;
-  imageUrl: string;
-}
-
-// Predefined list of common words for sign language practice with associated images
-const SIGN_WORDS: Sign[] = [
-  { word: "hello", imageUrl: "/images/hello.jpg" },
-  { word: "thank you", imageUrl: "/images/thankyou.jpg" },
-  { word: "please", imageUrl: "/images/please.jpg" },
-  { word: "sorry", imageUrl: "/images/sorry.jpg" },
-  { word: "yes", imageUrl: "/images/yes.jpg" },
-  { word: "no", imageUrl: "/images/no.jpg" },
-  { word: "help", imageUrl: "/images/help.png" },
-  { word: "eat", imageUrl: "/images/eat.png" },
-  { word: "drink", imageUrl: "/images/drink.png" },
-
-  // alphabets
-  { word: "a", imageUrl: "/images/alphabet/a.png" },
-  { word: "b", imageUrl: "/images/alphabet/b.png" },
-  { word: "c", imageUrl: "/images/alphabet/c.png" },
-  { word: "d", imageUrl: "/images/alphabet/d.png" },
-  { word: "e", imageUrl: "/images/alphabet/e.png" },
-  { word: "f", imageUrl: "/images/alphabet/f.png" },
-  { word: "g", imageUrl: "/images/alphabet/g.png" },
-  { word: "h", imageUrl: "/images/alphabet/h.png" },
-  { word: "i", imageUrl: "/images/alphabet/i.png" },
-  { word: "j", imageUrl: "/images/alphabet/j.png" },
-  { word: "k", imageUrl: "/images/alphabet/k.png" },
-  { word: "l", imageUrl: "/images/alphabet/l.png" },
-  { word: "m", imageUrl: "/images/alphabet/m.png" },
-  { word: "n", imageUrl: "/images/alphabet/n.png" },
-  { word: "o", imageUrl: "/images/alphabet/o.png" },
-  // { word: "p", imageUrl: "/images/alphabet/p.png" },
-  // { word: "q", imageUrl: "/images/alphabet/q.png" },
-  // { word: "r", imageUrl: "/images/alphabet/r.png" },
-  // { word: "s", imageUrl: "/images/alphabet/s.png" },
-  // { word: "t", imageUrl: "/images/alphabet/t.png" },
-  // { word: "u", imageUrl: "/images/alphabet/u.png" },
-  // { word: "v", imageUrl: "/images/alphabet/v.png" },
-  // { word: "w", imageUrl: "/images/alphabet/w.png" },
-  // { word: "x", imageUrl: "/images/alphabet/x.png" },
-  // { word: "y", imageUrl: "/images/alphabet/y.png" },
-  // { word: "z", imageUrl: "/images/alphabet/z.png" },
-
-  // { word: "love", imageUrl: "/images/love.png" },
-  // { word: "work", imageUrl: "/images/work.png" },
-  // { word: "school", imageUrl: "/images/school.png" },
-  // { word: "sleep", imageUrl: "/images/sleep.png" },
-  // { word: "play", imageUrl: "/images/play.png" },
-  // { word: "happy", imageUrl: "/images/happy.png" },
-  // { word: "friend", imageUrl: "/images/friend.png" },
-  // { word: "family", imageUrl: "/images/family.png" },
-  // { word: "sad", imageUrl: "/images/sad.png" },
-  // { word: "hot", imageUrl: "/images/hot.png" },
-  // { word: "cold", imageUrl: "/images/cold.png" },
-  // { word: "good", imageUrl: "/images/good.png" },
-  // { word: "bad", imageUrl: "/images/bad.png" },
-  // { word: "morning", imageUrl: "/images/morning.png" },
-  // { word: "night", imageUrl: "/images/night.png" },
-];
+import { SIGN_WORDS } from "@/data/quizgame-data";
+import { Sign } from "@/types/types";
 
 const SignQuizGame = () => {
   // Game state
@@ -84,22 +22,17 @@ const SignQuizGame = () => {
   const [letterCount, setLetterCount] = useState("any");
   const [speed, setSpeed] = useState(50);
   const [options, setOptions] = useState<string[]>([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [feedback, setFeedback] = useState<{
     message: string;
     isCorrect: boolean;
   } | null>(null);
+  const [questionsAnswered, setQuestionsAnswered] = useState(0); // Track number of questions answered
 
   // Load scores from localStorage on component mount
   useEffect(() => {
     const savedHighScore = localStorage.getItem("signGameHighScore");
     if (savedHighScore) {
       setHighScore(Number.parseInt(savedHighScore));
-    }
-
-    const savedIsLoggedIn = localStorage.getItem("signGameIsLoggedIn");
-    if (savedIsLoggedIn === "true") {
-      setIsLoggedIn(true);
     }
   }, []);
 
@@ -130,8 +63,6 @@ const SignQuizGame = () => {
     // Select a random word
     const randomSign =
       filteredWords[Math.floor(Math.random() * filteredWords.length)];
-
-    // console.log("Randomly Selected Word:", randomSign.word); // Debugging
 
     setCurrentSign(randomSign);
 
@@ -165,12 +96,7 @@ const SignQuizGame = () => {
     const normalizedUserAnswer = selectedAnswer.trim().toLowerCase();
     const normalizedCorrectAnswer = currentSign.word.trim().toLowerCase();
 
-    // console.log("Correct Answer:", normalizedCorrectAnswer); // Debugging
-    // console.log("User Answer:", normalizedUserAnswer); // Debugging
-
     const isCorrect = normalizedCorrectAnswer === normalizedUserAnswer;
-
-    // console.log("Is Correct:", isCorrect); // Debugging
 
     if (isCorrect) {
       const newScore = score + 1;
@@ -186,10 +112,20 @@ const SignQuizGame = () => {
       });
     }
 
-    // Automatically generate a new sign after a delay
-    setTimeout(() => {
-      generateNewSign();
-    }, 2000);
+    // Increment the number of questions answered
+    setQuestionsAnswered((prev) => prev + 1);
+
+    // Check if 5 questions have been answered
+    if (questionsAnswered + 1 === 5) {
+      const finalScore = (score + (isCorrect ? 1 : 0)) * 20; // Calculate score out of 100
+      alert(`Your score is ${finalScore}/100!`);
+      resetGame(); // Reset the game after 5 questions
+    } else {
+      // Automatically generate a new sign after a delay
+      setTimeout(() => {
+        generateNewSign();
+      }, 2000);
+    }
   };
 
   // Handle replay
@@ -211,50 +147,29 @@ const SignQuizGame = () => {
   const resetGame = () => {
     resetScores();
     setReplays(5);
+    setQuestionsAnswered(0); // Reset the number of questions answered
     generateNewSign();
   };
 
-  // Login to save scores
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    localStorage.setItem("signGameIsLoggedIn", "true");
-  };
   return (
     <>
-      <section className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4">
-        <div className="w-full max-w-md overflow-hidden bg-white rounded-lg shadow-md">
-          <div className="p-6 border-b">
-            <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-semibold text-gray-800">
-                Fingerspelling Game
-              </h1>
-              <button className="text-gray-500 hover:text-gray-700">
-                <InfoCircle size={20} />
-              </button>
-            </div>
-          </div>
-
+      <section className="flex min-h-screen flex-col items-center justify-center p-4 mb-24">
+        <div className="w-full max-w-xl overflow-hidden bg-white rounded-lg shadow-md">
           <div className="p-6">
-            <div className="flex justify-between mb-4">
-              <div>
-                <div className="text-gray-700">Score {score}</div>
-                <div className="text-green-500">Highscore {highScore}</div>
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mb-4">
+              <div className="col-span-1">
+                <div className="text-gray-700 pb-3">Score: {score}</div>
+                <div className="text-primary_main pb-3">
+                  Highscore {highScore}
+                </div>
                 <div className="text-gray-500">Replays {replays}</div>
-                {!isLoggedIn && (
-                  <button
-                    onClick={handleLogin}
-                    className="text-sm text-blue-500 hover:underline"
-                  >
-                    Sign in before playing to save scores
-                  </button>
-                )}
               </div>
 
-              <div className="flex items-center justify-center w-48 h-48 bg-gray-100 rounded-md">
+              <div className="flex items-center justify-center h-48 bg-gray-100 rounded-md col-span-2  w-full">
                 {loading ? (
                   <p className="text-gray-500">Loading sign description...</p>
                 ) : currentSign ? (
-                  <div className="text-center">
+                  <div className="text-center w-full bg-red-5002">
                     {showAnswer && (
                       <p className="mb-2 font-bold">{currentSign.word}</p>
                     )}
@@ -273,21 +188,21 @@ const SignQuizGame = () => {
             <div className="grid grid-cols-3 gap-2 mb-4">
               <Button
                 onClick={generateNewSign}
-                className="text-white bg-green-500 hover:bg-green-600"
+                className="text-white bg-primary_main hover:bg-primary_main disabled:opacity-50"
               >
                 New Word
               </Button>
               <Button
                 onClick={handleReplay}
                 disabled={replays <= 0 || !currentSign}
-                className="text-white bg-green-500 hover:bg-green-600 disabled:opacity-50"
+                className="text-white bg-primary_main hover:bg-primary_main disabled:opacity-50"
               >
                 Replay Word
               </Button>
               <Button
                 onClick={() => setShowAnswer(true)}
                 disabled={!currentSign}
-                className="text-white bg-green-500 hover:bg-green-600 disabled:opacity-50"
+                className="text-white bg-primary_main hover:bg-primary_main disabled:opacity-50"
               >
                 Show Answer
               </Button>
@@ -316,7 +231,7 @@ const SignQuizGame = () => {
                   <Button
                     onClick={() => checkAnswer(userAnswer)}
                     disabled={!userAnswer || !currentSign || showAnswer}
-                    className="text-white bg-green-500 hover:bg-green-600"
+                    className="text-white bg-primary_main hover:bg-primary_main disabled:opacity-50"
                   >
                     Check
                   </Button>

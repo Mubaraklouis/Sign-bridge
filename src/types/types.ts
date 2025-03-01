@@ -11,3 +11,8 @@ export type Feature = {
   title: string;
   desc: string;
 };
+
+export interface Sign {
+  word: string;
+  imageUrl: string;
+}
