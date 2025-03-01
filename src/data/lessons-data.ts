@@ -110,7 +110,7 @@ export const categories = {
         id: "medical",
         title: "Medical Terminology",
         description: "Essential signs for healthcare and medical situations",
-        image: "/placeholder.svg?height=150&width=250",
+        image: "/specialize.webp",
         duration: "50 min",
         level: "Specialized",
       },
@@ -119,7 +119,7 @@ export const categories = {
         title: "Educational Terms",
         description:
           "Signs commonly used in classroom and educational settings",
-        image: "/placeholder.svg?height=150&width=250",
+        image: "/education.webp",
         duration: "35 min",
         level: "Specialized",
       },

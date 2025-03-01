@@ -6,7 +6,7 @@ import React from "react";
 const Header = () => {
   return (
     <>
-      <header className="bg-white border-b border-gray-200 py-2 sticky top-0 flex items-center justify-between md:px-14 px-2">
+      <header className="bg-white border-b border-gray-200 py-2 sticky top-0 flex items-center justify-between md:px-14 px-2 z-50">
         <Link href="/" className="font-bold dark:text-black">
           <h1 className="flex items-center">
             <SignalHigh />

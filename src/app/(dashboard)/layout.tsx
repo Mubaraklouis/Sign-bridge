@@ -5,6 +5,7 @@ import Script from "next/script";
 import Header from "@/layout/dashboard/header";
 import Navigation from "@/layout/dashboard/navigation";
 import { ThemeProvider } from "@/context/theme-provider";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,6 +60,7 @@ export default function DashboardLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <Navigation />
+          <Toaster position="top-right" />
         </ThemeProvider>
       </body>
     </html>

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -13,16 +15,17 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { toast } from "react-hot-toast";
 
 export default function LessonsPage() {
-  // This would come from a database in a real application
+  // This is the Lessons Category main data
   const categories = [
     {
       id: "beginner",
       title: "Beginner",
       description:
         "Start your sign language journey with basic signs and simple phrases",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/beginners.webp",
       progress: 0,
       lessons: 10,
       completedLessons: 0,
@@ -33,7 +36,7 @@ export default function LessonsPage() {
       title: "Intermediate",
       description:
         "Build on your foundation with more complex signs and conversations",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/intermediate.webp",
       progress: 0,
       lessons: 15,
       completedLessons: 0,
@@ -44,7 +47,7 @@ export default function LessonsPage() {
       title: "Advanced",
       description:
         "Master advanced concepts, idioms, and fluent signing techniques",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/advance.webp",
       progress: 0,
       lessons: 12,
       completedLessons: 0,
@@ -55,13 +58,17 @@ export default function LessonsPage() {
       title: "Specialized Topics",
       description:
         "Learn specialized vocabulary for specific contexts and situations",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/specialize.webp",
       progress: 0,
       lessons: 8,
       completedLessons: 0,
       color: "bg-orange-100 text-orange-800 hover:bg-orange-200",
     },
   ];
+
+  const handleUpgrade = () => {
+    toast.success("Upgrade to premium to unlock recommended lessons");
+  };
 
   return (
     <div className="container py-10 mx-auto px-2 mb-20">
@@ -73,15 +80,15 @@ export default function LessonsPage() {
             to advanced.
           </p>
         </div>
-        <Button asChild>
-          <Link href="/lessons/recommended">Recommended for You</Link>
+        <Button asChild onClick={handleUpgrade}>
+          <span>Recommended for You</span>
         </Button>
       </div>
 
       <div className="grid gap-6 mt-8 md:grid-cols-2 lg:grid-cols-2">
         {categories.map((category) => (
           <Card key={category.id} className="overflow-hidden">
-            <div className="relative h-[200px] w-full">
+            <div className="relative md:h-[400px] h-[200px] w-full">
               <Image
                 src={category.image || "/placeholder.svg"}
                 alt={category.title}

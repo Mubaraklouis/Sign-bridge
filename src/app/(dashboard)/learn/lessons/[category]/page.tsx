@@ -56,7 +56,7 @@ export default function CategoryPage({
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {category.lessons.map((lesson) => (
           <Card key={lesson.id} className="overflow-hidden flex flex-col">
-            <div className="relative h-[150px] w-full">
+            <div className="relative h-[250px] w-full">
               <Image
                 src={lesson.image || "/placeholder.svg"}
                 alt={lesson.title}
