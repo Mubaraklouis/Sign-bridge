@@ -19,7 +19,7 @@ const Navigation = () => {
                 href={item.href}
                 key={item.label}
                 className={`flex flex-col items-center md:gap-1 md:text-base text-sm pt-2 ${
-                  isActive ? "text-blue-500 font-bold" : ""
+                  isActive ? "text-primary_main font-bold" : ""
                 }`}
               >
                 <item.icon />
