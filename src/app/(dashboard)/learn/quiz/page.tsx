@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { SIGN_WORDS } from "@/data/quizgame-data";
 import { Sign } from "@/types/types";
+import { useRouter } from "next/navigation";
 
 const SignQuizGame = () => {
   // Game state
@@ -151,9 +152,17 @@ const SignQuizGame = () => {
     generateNewSign();
   };
 
+  const router = useRouter();
+
   return (
     <>
       <section className="flex min-h-screen flex-col items-center justify-center p-4 mb-24">
+        <button
+          onClick={() => router.back()}
+          className="mb-4 bg-primary_main px-3 py-1 rounded-lg text-white"
+        >
+          Back
+        </button>
         <div className="w-full max-w-xl overflow-hidden bg-white rounded-lg shadow-md">
           <div className="p-6">
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mb-4">

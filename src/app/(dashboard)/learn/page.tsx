@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const toolsData = [
   {
-    label: "Dictonary",
+    label: "Lessons",
     icon: BookAudio,
-    path: "/learn/dictionary",
+    path: "/learn/lessons",
   },
   {
     label: "Quiz",
