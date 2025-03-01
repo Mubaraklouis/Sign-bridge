@@ -2,7 +2,6 @@ import { ModeToggle } from "@/context/modetoggle";
 import { SignalHigh } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { MobileNavbar } from "./MobileNavbar";
 
 const Navbar = () => {
   return (
@@ -15,18 +14,6 @@ const Navbar = () => {
               Sign<span className="text-primary_main">Bridge</span>
             </span>
           </h1>
-          <menu className="hidden md:flex items-center gap-10">
-            <li>
-              <Link href="/" className="font-medium">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/learn" className="font-medium">
-                Learn More
-              </Link>
-            </li>
-          </menu>
           <div className="flex items-center gap-4">
             <Link href="/login">
               <button className="bg-primary_main text-white md:px-4 md:py-2 px-2 py-1 rounded-md">
@@ -34,7 +21,6 @@ const Navbar = () => {
               </button>
             </Link>
             <ModeToggle />
-            <MobileNavbar />
           </div>
         </div>
       </header>

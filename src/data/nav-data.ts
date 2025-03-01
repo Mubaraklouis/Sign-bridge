@@ -1,9 +1,9 @@
 import { NavItemType } from "@/types/types";
 import {
+  LibraryBig,
   MessageCircle,
   Mic,
   Settings,
-  User,
   Video,
   WifiOff,
 } from "lucide-react";
@@ -20,9 +20,9 @@ export const navData: NavItemType[] = [
     href: "/text-to-speech",
   },
   {
-    label: "Avatar",
-    icon: User,
-    href: "/avatar",
+    label: "Learn",
+    icon: LibraryBig,
+    href: "/learn",
   },
   {
     label: "Video",
