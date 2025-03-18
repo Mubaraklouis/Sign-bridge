@@ -101,12 +101,58 @@ Our app aligns with the hackathon theme by directly addressing a critical need i
 
 ### Backend:
 
-- **Server:** Node.js, Django, or Flask for scalable server-side logic.
-- **Database:** MongoDB or PostgreSQL for user data and interaction logs.
-- **Cloud Hosting:** AWS, Google Cloud, or Azure for scalability and performance.
+- **Microservices Architecture**:
+  - **Node.js & Express**: For user authentication, chat, and video call functionality.
+  - **Laravel**: For course management, assignment tracking, and performance analytics.
+  - **MongoDB**: For storing user data, chat logs, and interaction history.
+  - **PostgreSQL**: For structured data like courses, assignments, and performance metrics.
+- **Cloud Hosting**: AWS, Google Cloud, or Azure for scalability and performance.
 
-### Machine Learning & AI:
+### Machine Learning & AI (Under Development):
 
-- **Speech Recognition:** Google Cloud Speech-to-Text or Microsoft Azure Speech Services.
-- **Text-to-Sign Language Translation:** Custom machine learning models using TensorFlow or PyTorch for sign language recognition.
-- **Avatar Animation:** Unity3D or custom animation software to render avatars in real-time.
+- **Speech Recognition**: Google Cloud Speech-to-Text or Microsoft Azure Speech Services.
+- **Text-to-Sign Language Translation**: Custom machine learning models using TensorFlow or PyTorch for sign language recognition.
+- **Avatar Animation**: Unity3D or custom animation software to render avatars in real-time.
+
+---
+
+## Version
+
+**MVP Version**: 1.0.0  
+**Status**: In Development (Backend is functional; Machine Learning is under development)
+
+---
+
+## License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeatureName`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeatureName`).
+5. Open a pull request.
+
+---
+
+## Contact
+
+For any questions or feedback, feel free to reach out:
+
+- **📧 Email**: [your-email@example.com](mailto:your-email@example.com)
+- **🐦 X (Twitter)**: [@your-x-handle](https://twitter.com/your-x-handle)
+- **🔗 LinkedIn**: [linkedin.com/in/your-linkedin](https://linkedin.com/in/your-linkedin)
+- **📸 Instagram**: [@your-instagram](https://instagram.com/your-instagram)
+- **🌐 Portfolio**: [your-portfolio.com](https://your-portfolio.com)
+
+---
+
+<p align="center">
+  Thank you for your interest in the Translator & Communication Assistant! 🚀
+</p>
