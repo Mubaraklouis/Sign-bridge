@@ -125,21 +125,10 @@ Our app aligns with the hackathon theme by directly addressing a critical need i
 
 ## License
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+Copyright (c) 2026 Mobarak Kuol Louis Dau. All rights reserved. This code is published for portfolio and evaluation purposes only. No permission is granted to use, copy, modify or distribute it without prior written permission. See the LICENSE file. For licensing enquiries: mubaraklouis@gmail.com
 
 ---
 
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeatureName`).
-3. Commit your changes (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature/YourFeatureName`).
-5. Open a pull request.
-
----
 
 ## Contact
 
